@@ -109,7 +109,7 @@ Contributions are welcome! Please open an issue or submit a pull request.
 This project is licensed under the MIT License — see the LICENSE file for details.
 
 👨‍💻 Author
-Made with ❤️ by Your Name
+Made with ❤️ by Mohammed Fackruddin Tusher
 
 📁 .env.example
 env
@@ -127,11 +127,4 @@ vbnet
 Copy
 Edit
 
-You can now copy the entire block above ☝️ and save it directly as a `README.md` file in your repo.  
 
-If you tell me:
-✅ Your GitHub username  
-✅ The license you want (MIT / GPL / Apache-2.0)  
-✅ Your actual name or alias  
-
-…I can replace the placeholders automatically for you too. Let me know if you’d like that! 🚀
