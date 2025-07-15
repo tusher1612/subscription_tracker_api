@@ -57,21 +57,16 @@ Built with **Node.js**, **Express.js**, and **MongoDB**, it is designed to be si
 }
 
 
-
 🚀 Getting Started
 📥 Clone & Install
-bash
-Copy
-Edit
+
 git clone https://github.com/yourusername/subscription_tracker_api.git
 cd subscription_tracker_api
 npm install
-⚙️ Environment Variables
-Create a .env file in the root folder and set the following variables:
 
-env
-Copy
-Edit
+⚙️ Environment Variables
+Create a .env file in the root folder and set the following variables
+
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 UPSTASH_QSTASH_URL=your_upstash_workflow_url
@@ -80,51 +75,15 @@ SMTP_HOST=your_smtp_host
 SMTP_PORT=your_smtp_port
 SMTP_USER=your_smtp_user
 SMTP_PASS=your_smtp_password
+
 🏃 Run the Server
-bash
-Copy
-Edit
 npm start
-The API will be available at:
-📍 http://localhost:5000/
 
-🔐 Authentication
-If you choose to secure your endpoints, attach an Authorization header with each request:
 
-makefile
-Copy
-Edit
-Authorization: Bearer <your-jwt-token>
-You can implement your own authentication middleware or use existing libraries such as passport or jsonwebtoken.
 
-📨 Reminder Workflow
-This project integrates with Upstash Workflow to handle scheduled jobs for sending reminders at 7, 5, 2, and 1 days before the renewal date.
-You’ll need a valid Upstash Workflow account and token.
-The workflow is defined in workflows/sendReminders.js.
 
-🤝 Contributing
-Contributions are welcome! Please open an issue or submit a pull request.
 
-📄 License
-This project is licensed under the MIT License — see the LICENSE file for details.
 
-👨‍💻 Author
-Made with ❤️ by Mohammed Fackruddin Tusher
 
-📁 .env.example
-env
-Copy
-Edit
-PORT=5000
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname?retryWrites=true&w=majority
-UPSTASH_QSTASH_URL=https://qstash.upstash.io/v1/publish
-UPSTASH_QSTASH_TOKEN=your_upstash_token_here
-SMTP_HOST=smtp.mailtrap.io
-SMTP_PORT=587
-SMTP_USER=username
-SMTP_PASS=password
-vbnet
-Copy
-Edit
 
 
