@@ -65,24 +65,35 @@ user:{
 }},{timestamps:true});
 
 //mongoose middleware hook to validate or compute something before saving
-subscriptionSchema.pre('save',(next)=>{
-if (!this.renewalDate){
-  const renewalPeriods={
-   Daily:1,
-   Weekly:7,
-   Monthly:30,
-   Yearly:365,
-  };
-  
-  this.renewalDate.setDate(this.startDate + renewalPeriods[this.frequency])
-}
 
-if(this.renewalDate< new Date()){
-  this.status='expired'
-};
+
+subscriptionSchema.pre('save', function (next) {
+  if (!this.renewalDate) {
+    const renewalPeriods = {
+      Daily: 1,
+      Weekly: 7,
+      Monthly: 30,
+      Yearly: 365,
+    };
+
+    const periodDays = renewalPeriods[this.frequency];
+    if (!periodDays) {
+      return next(new Error('Invalid subscription frequency'));
+    }
+
+    const startDate = new Date(this.startDate);
+    const renewalDate = new Date(startDate);
+    renewalDate.setDate(startDate.getDate() + periodDays);
+
+    this.renewalDate = renewalDate;
+  }
+
+  if (this.renewalDate < new Date()) {
+    this.status = 'expired';
+  }
+
   next();
-})
-
+});
 
 
 
