@@ -55,12 +55,13 @@ Built with **Node.js**, **Express.js**, and **MongoDB**, it is designed to be si
   "startDate": "2025-07-15T00:00:00.000Z",
   "renewalDate": "2025-07-16T00:00:00.000Z"
 }
+```
 
 
 🚀 Getting Started
 📥 Clone & Install
 
-git clone https://github.com/yourusername/subscription_tracker_api.git
+git clone https://github.com/tusher1612/subscription_tracker_api.git
 cd subscription_tracker_api
 npm install
 
@@ -78,6 +79,7 @@ SMTP_PASS=your_smtp_password
 
 🏃 Run the Server
 npm start
+
 
 
 
