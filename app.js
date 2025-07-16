@@ -27,7 +27,12 @@ app.use(errorMiddleWare)
 
 
 app.get("/",(req,res)=>{
-  res.send("Welcome to the Express Js tutorial")
+res.send(`
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <h1>Welcome to the Express Js tutorial</h1>
+  </div>
+`);
+
 })
 app.listen(PORT , async()=>{
   console.log(`Server is running successfully on----> http://localhost:${PORT}`)

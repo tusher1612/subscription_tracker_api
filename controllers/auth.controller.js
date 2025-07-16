@@ -7,41 +7,52 @@ import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js";
 
 
 //SignUp
-export const signUp= async(req,res,next)=>{
-    const session=await mongoose.startSession();
-      session.startTransaction()
-     try {
- const {name,email,password}=req.body;
+export const signUp = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  try {
+    await session.startTransaction();
 
-    const existingUser=await User.findOne({email});
-    if (existingUser){
-      const  error =new Error("User already exist");
-        error.statusCode=409;
-        throw error;
+    const { name, email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      const error = new Error("User already exists");
+      error.statusCode = 409;
+      throw error;
     }
 
-    const salt=  await  bcrypt.genSalt(10);
-    const hashPassword= await bcrypt.hash(password,salt)
-    const newUsers=await User.create([{name,email,password:hashPassword}],{session})
-    const token= jwt.sign({userId:newUsers[0]._id},JWT_SECRET,{expiresIn:JWT_EXPIRES_IN})
-     session.commitTransaction();
-    
-        res.status(201).json({
-                success:true,
-                message:"User created successfully",
-                data:{
-            token,
-            user:newUsers[0]
-                }
-            })
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    const newUsers = await User.create(
+      [{ name, email, password: hashPassword }],
+      { session }
+    );
+
+    const token = jwt.sign(
+      { userId: newUsers[0]._id },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+
+    await session.commitTransaction();
+
+    res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: {
+        token,
+        user: newUsers[0],
+      },
+    });
   } catch (error) {
-await session.abortTransaction();
-next(error);
+    await session.abortTransaction();
+    next(error);
+  } finally {
+    session.endSession();
   }
-  finally {
-         session.endSession();
-  }
-}
+};
 
 
 //SignIn
